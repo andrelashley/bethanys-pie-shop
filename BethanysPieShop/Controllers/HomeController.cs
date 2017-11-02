@@ -5,33 +5,27 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using BethanysPieShop.Models;
+using BethanysPieShop.ViewModels;
 
 namespace BethanysPieShop.Controllers
 {
     public class HomeController : Controller
     {
-        public IActionResult Index()
+        private readonly IPieRepository _pieRepository;
+
+        public HomeController(IPieRepository pieRepository)
         {
-            return View();
+            _pieRepository = pieRepository;
         }
 
-        public IActionResult About()
+        public ViewResult Index()
         {
-            ViewData["Message"] = "Your application description page.";
+            var homeViewModel = new HomeViewModel
+            {
+                PiesOfTheWeek = _pieRepository.PiesOfTheWeek
+            };
 
-            return View();
-        }
-
-        public IActionResult Contact()
-        {
-            ViewData["Message"] = "Your contact page.";
-
-            return View();
-        }
-
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            return View(homeViewModel);
         }
     }
 }

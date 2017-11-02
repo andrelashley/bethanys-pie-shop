@@ -1,0 +1,6 @@
+﻿@model PiesListViewModel
+
+@foreach (var pie in Model.Pies)
+{
+    @Html.Partial("PieOverviewSummary", pie)
+}

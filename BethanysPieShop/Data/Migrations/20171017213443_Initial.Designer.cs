@@ -11,9 +11,10 @@ using System;
 namespace BethanysPieShop.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20171017213443_Initial")]
+    partial class Initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -115,24 +116,6 @@ namespace BethanysPieShop.Data.Migrations
                     b.HasIndex("CategoryId");
 
                     b.ToTable("Pies");
-                });
-
-            modelBuilder.Entity("BethanysPieShop.Models.ShoppingCartItem", b =>
-                {
-                    b.Property<int>("ShoppingCartItemId")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int>("Amount");
-
-                    b.Property<int?>("PieId");
-
-                    b.Property<string>("ShoppingCartId");
-
-                    b.HasKey("ShoppingCartItemId");
-
-                    b.HasIndex("PieId");
-
-                    b.ToTable("ShoppingCartItems");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -249,13 +232,6 @@ namespace BethanysPieShop.Data.Migrations
                         .WithMany("Pies")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("BethanysPieShop.Models.ShoppingCartItem", b =>
-                {
-                    b.HasOne("BethanysPieShop.Models.Pie", "Pie")
-                        .WithMany()
-                        .HasForeignKey("PieId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
